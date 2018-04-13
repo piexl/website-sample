@@ -1,0 +1,151 @@
+/*	
+Author:kermit
+Email:455196886@qq.com
+Company:http://dragontrail.com/
+Creattime:2017-04-08
+*/
+//清除样式
+*{margin:0;padding:0;list-style:none}body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}body,button,input,select,textarea{font:14px/1.5 tahoma,arial,sans-serif}h1,h2,h3,h4,h5,h6{font-size:100%}address,cite,dfn,em,var{font-style:normal}code,kbd,pre,samp{font-family:courier new,courier,monospace}small{font-size:12px}ul,ol{list-style:none}a{text-decoration:none}a:hover{text-decoration:none}legend{color:#000}fieldset,img{border:0}button,input,select,textarea{font-size:100%}table{border-collapse:collapse;border-spacing:0}
+
+//基础样式类库
+@import "ProPreboot.less";
+
+// =============================================================================
+// 页面元素相关
+// =============================================================================
+
+//所有元素采用'border-box'盒模型
+*,*:before,*:after{.box-sizing(border-box);}
+
+//body样式
+html,body{
+	width:100%;
+	min-height:100%;
+	background-color:@body-bg;
+	line-height:@line-height-base;
+	font-size:@font-size-base;
+	color:@text-color;
+	overflow-x:hidden;
+	background-color:#ededed;
+}
+
+//图片
+img{max-width:100%;}
+
+// 链接
+a {
+	color: #333;
+	text-decoration: none;
+	&[href]{
+		cursor:pointer;
+	}
+	&:hover {
+	  	color:#000;
+	  	text-decoration: underline;
+	}
+}
+
+//按钮
+button{
+  outline:none;
+  cursor:pointer;
+}
+
+// =============================================================================
+// 文字相关大小颜色对齐方式
+// =============================================================================
+
+//文字对齐方式
+.text-left{text-align:left;}
+.text-right{text-align:right;}
+.text-center{text-align:center;}
+
+// 文字颜色
+.text-primary{color:@brand-primary}
+
+//灰色字
+.text-gray{color:@gray;} //#555
+.text-gray-light{color:@gray-light;} //#999
+.text-gray-lighter{color:@gray-lighter;} //#eee
+
+//文字大小
+.text-xxxl{font-size:@font-size-xxxl;}
+.text-xxl{font-size:@font-size-xxl;}
+.text-xl{font-size:@font-size-xl;}
+.text-lg{font-size:@font-size-lg;}
+.text-md{font-size:@font-size-md;}
+.text-sm{font-size:@font-size-sm;}
+
+// =============================================================================
+// 布局相关
+// =============================================================================
+
+//显示与隐藏
+.hide{display:none!important;}
+.show{display:block!important;}
+.invisible{visibility:hidden;}
+
+//左浮动
+.float-left {float:left;}
+//右浮动
+.float-right {float:right;}
+
+//引入图标字体库
+@font-face {
+  font-family: 'iconfont';  /* project id 587990 */
+  src: url('//at.alicdn.com/t/font_587990_6nj5j3eeaieh4cxr.eot');
+  src: url('//at.alicdn.com/t/font_587990_6nj5j3eeaieh4cxr.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_587990_6nj5j3eeaieh4cxr.woff') format('woff'),
+  url('//at.alicdn.com/t/font_587990_6nj5j3eeaieh4cxr.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_587990_6nj5j3eeaieh4cxr.svg#iconfont') format('svg');
+}
+
+//字体图标
+.iconfont{font-size:14px;line-height:1;}
+
+//图片盒子
+.img-box{font-size:0;line-height:0;background-size:100% auto;}
+
+//页面内容区域
+.wrapper{
+	.box-sizing;
+	.clearfix();
+	&.wrapper-fixed{
+		width:100%;
+		max-width:1170px;
+		margin-left:auto;
+		margin-right:auto;
+		//overflow:hidden;
+		@media (max-width:@screen-md-max){
+			max-width:@screen-md-min - 15*2;
+			padding-left:15px;
+			padding-right:15px;
+		}
+		@media (max-width:@screen-sm-max){
+			max-width:@screen-sm-min;
+			padding-left:35*@rpx;
+			padding-right:35*@rpx;
+		}
+	}
+	&.wrapper-fluid{
+		width:100%;
+	}
+}
+
+//图片放大效果
+.zoom-box{
+	display:block;
+	overflow:hidden;
+	img{.transition(all,0.5s,ease,0s);.transform-origin(center,center)}
+	&:hover{
+		img{.scale3d(1.05,1.05,1.05);}
+	}
+}
+
+//页面不能滚动
+html.un-scroll{
+	overflow:hidden;
+	body{overflow:hidden;}
+}
+
+

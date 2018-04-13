@@ -1,0 +1,65 @@
+/*	
+Author:kermit
+Email:455196886@qq.com
+Company:http://dragontrail.com/
+Creattime:2017-04-08
+*/
+
+//基础样式类库
+@import "ProPreboot.less";
+
+//内容居中flex兼容不好IE10+
+.flex-center-box{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+//区域块
+.section{
+    margin-bottom:40px;
+}
+
+//固定盒子模板
+.wrapper-fixed-sample{
+    height:100px;
+    background-color:@gray-light;
+    .flex-center-box;
+}
+
+//网格示例
+.grid{
+    @grid-columns:24;
+    @grid-column-gutters:30px;
+    .make-row(@grid-column-gutters:@grid-column-gutters);
+    .grid-item{
+        .make-column(@columns:6,@grid-columns:@grid-columns,@grid-column-gutters: @grid-column-gutters);
+        height:100px;
+        background-color:@gray-light;
+        .grid-item-inner{
+            width:100%;
+            height:100%;
+            color:#fff;
+            background-color:@brand-primary;
+            .flex-center-box;
+            &:hover{
+                background-color:darken(@brand-primary,10%);
+            }
+        }
+    }
+}
+
+//示例幻灯片
+.swiper-sample{
+    width:100%;
+    height:400px;
+    background-color:@gray-light;
+    .swiper-slide{
+        .flex-center-box;
+    }
+}
+
+
+
+
+

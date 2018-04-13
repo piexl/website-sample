@@ -1,0 +1,435 @@
+/*	
+Author:kermit
+Email:455196886@qq.com
+Company:http://dragontrail.com/
+Creattime:2017-03-26
+*/
+
+/*
+===== 变量的定义 =====
+*/
+
+//设计稿750px分成100份，1a=7.5px, 1rem=75px, 设计稿中的1px = 1/75rem;
+
+@rpx:1/75rem;
+
+/*===== 媒体查询节点 ======*/
+@screen-xs:         576px; //超小屏幕
+@screen-sm:         768px; //小屏幕
+@screen-md:         992px; //中等屏幕
+@screen-lg:         1200px; //超大屏幕
+@screen-xs-min:     @screen-xs;
+@screen-sm-min:     @screen-sm;
+@screen-md-min:     @screen-md;
+@screen-lg-min:     @screen-lg;
+@screen-xs-max:     (@screen-sm-min - 1);
+@screen-sm-max:     (@screen-md-min - 1);
+@screen-md-max:     (@screen-lg-min - 1);
+
+/*===== 颜色的定义 =====*/
+@red            : #e22428;
+@orange         : #F2711C;
+@yellow         : #FBBD08;
+@olive          : #B5CC18;
+@green          : #21BA45;
+@teal           : #00B5AD;
+@blue           : #046fe6;
+@violet         : #6435C9;
+@purple         : #A333C8;
+@pink           : #E03997;
+@brown          : #A5673F;
+@grey           : #767676;
+@black          : #1B1C1D;
+@white          : #FFFFFF;
+
+//灰色
+@gray-darker:     lighten(@black, 13.5%); // #222
+@gray-dark:       lighten(@black, 20%);   // #333
+@gray:            lighten(@black, 33.5%); // #555
+@gray-light:      lighten(@black, 60%);   // #999
+@gray-lighter:    lighten(@black, 93.5%); // #eee
+
+/*===== 品牌颜色设置 =====*/
+@brand-primary  : @blue;
+@brand-success  : @green;
+@brand-info     : @teal;
+@brand-warning  : @yellow;
+@brand-danger   : @red;
+
+/*===== 网站外观的关键颜色设置 =====*/
+@body-bg:    #fff;
+@text-color: lighten(@black, 10%);
+
+/*===== 链接颜色设置 =====*/
+@link-color:       @brand-primary;
+@link-hover-color: darken(@link-color, 10%);
+@link-hover-decoration: underline;
+
+/*===== 排版设计=====*/
+
+// 文字字体
+@font-family-sans-serif:  'Microsoft YaHei',"Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-family-serif:       Georgia, "Times New Roman", Times, serif;
+@font-family-monospace:   Monaco, Menlo, Consolas, "Courier New", monospace;
+@font-family-base:        @font-family-sans-serif;
+
+/*===== 文字大小 =====*/
+@font-size-base:          14px;
+@font-size-xxxl:          ceil((@font-size-base * 3)); //42px
+@font-size-xxl:           ceil((@font-size-base * 2.28)); //32px
+@font-size-xl:            ceil((@font-size-base * 1.71)); //24px
+@font-size-lg:            ceil((@font-size-base * 1.25)); //18px
+@font-size-md:            ceil((@font-size-base * 1.14)); //16px
+@font-size-sm:            ceil((@font-size-base * 0.85)); //12px
+
+// 文字行高
+@line-height-base:        1.5;
+
+// 表单
+@input-color-placeholder: lighten(@text-color, 25%);
+
+// 网格
+// 栅格变量
+@grid-columns:          24; // 栅格列数
+@grid-column-gutters:   30px; // 间隙沟槽
+
+//
+// 网格系统
+// --------------------------------------------------
+
+// 制作网格
+.make-row(@grid-column-gutters: @grid-column-gutters) {
+  //设置负边距让行对其
+  margin-left: -@grid-column-gutters/2;
+  margin-right: -@grid-column-gutters/2;
+  // 清除浮动
+  .clearfix();
+}
+// 制作列
+.make-column(@columns:1,@grid-columns:@grid-columns,@grid-column-gutters: @grid-column-gutters) {
+  float: left;
+  //根据列数和总列计算宽
+  width: percentage(@columns / @grid-columns);
+  // 防止列空时崩溃
+  min-height: 1px;
+  // 设置padding作为槽
+  padding-left: @grid-column-gutters/2;
+  padding-right: @grid-column-gutters/2;
+  // 设置为border-box（填充不能增加宽度）
+  .box-sizing(border-box);
+}
+// 制作偏移列
+.make-column-offset(@columns:1,@grid-columns:@grid-columns) {
+  margin-left: percentage(@columns / @grid-columns);
+}
+
+/*===== 混合函数 ======*/
+
+//设置盒模型
+//@boxmodel content-box | border-box | inherit
+.box-sizing(@boxmodel:border-box) {
+  -webkit-box-sizing: @boxmodel;
+      box-sizing: @boxmodel;
+}
+
+//清除浮动
+.clearfix() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+//水平居中
+.center-block() {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// 设置尺寸
+.size(@width, @height) {
+  width: @width;
+  height: @height;
+}
+// 设置方形
+.square(@size) {
+  .size(@size, @size);
+}
+
+// 显示
+.responsive-visibility() {
+  display: block !important;
+}
+
+// 影藏
+.responsive-invisibility() {
+  display: none !important;
+}
+
+//可滚动的
+.scrollable() {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+//响应图片
+.img-responsive(@display: block) {
+  display: @display;
+  max-width: 100%;
+  height: auto;
+}
+
+//透明度
+.opacity(@opacity) {
+  opacity: @opacity;
+  @opacity-ie: @opacity * 100;
+  filter: ~"alpha(opacity=@{opacity-ie})"; // IE8
+}
+
+//文字颜色
+.text-color(@color) {
+  color: @color;
+  a&:hover,
+  a&:focus {
+    color: darken(@color, 10%);
+  }
+}
+
+//单行文字超出隐藏
+.text-truncate(@display: block) {
+  display: @display;
+  word-wrap: normal; /* for IE */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+//多行文字超出隐藏
+.text-truncate-lines(@line-num:3, @line-height:1.5em){
+  overflow : hidden;
+  height:@line-height*@line-num;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp:@line-num;
+  -webkit-box-orient: vertical;
+}
+
+//placeholder文字颜色
+.placeholder(@color: @input-color-placeholder) {
+  &:-moz-placeholder            { color: @color; } // Firefox 4-18
+  &::-moz-placeholder           { color: @color; } // Firefox 19+
+  &:-ms-input-placeholder       { color: @color; } // Internet Explorer 10+
+  &::-webkit-input-placeholder  { color: @color; } // Safari and Chrome
+}
+
+// 可调节 textareas 
+.resizable(@direction: both) {
+  resize: @direction; // Options: horizontal, vertical, both
+  // Safari fix
+  overflow: auto;
+}
+
+//圆角
+.border-radius(@radius) {
+  border-radius: @radius;
+}
+//单边圆角
+.border-top-radius(@radius) {
+  border-top-right-radius: @radius;
+  border-top-left-radius: @radius;
+}
+.border-right-radius(@radius) {
+  border-bottom-right-radius: @radius;
+  border-top-right-radius: @radius;
+}
+.border-bottom-radius(@radius) {
+  border-bottom-right-radius: @radius;
+  border-bottom-left-radius: @radius;
+}
+.border-left-radius(@radius) {
+  border-bottom-left-radius: @radius;
+  border-top-left-radius: @radius;
+}
+
+//阴影
+.box-shadow(@shadow) {
+  -webkit-box-shadow: @shadow; // iOS <4.3 & Android <4.1 & bb7.0
+    box-shadow: @shadow;
+}
+
+//箭头
+.arrow(@color:#DDD; @width:6px; @border-width: 2px; @deg: 45deg) {
+  display: inline-block;
+  width: @width;
+  height: @width;
+  border: @color solid;
+  border-width: @border-width @border-width 0 0;
+  transform: rotate(@deg);
+}
+
+//渐变背景
+	//@start-color       起始颜色
+	//@end-color  		 结束颜色
+	//@start-percent     起始角度
+	//@end-percent       结束角度
+
+//水平方向直线渐变
+.gradient-horizontal(@start-color: #555; @end-color: #333; @start-percent: 0%; @end-percent: 100%) {
+  background-image: -webkit-gradient(linear, @start-percent top, @end-percent top, from(@start-color), to(@end-color)); // Safari 4+, Chrome 2+
+  background-image: -webkit-linear-gradient(left, color-stop(@start-color @start-percent), color-stop(@end-color @end-percent)); // Safari 5.1+, Chrome 10+
+  background-image: -moz-linear-gradient(left, @start-color @start-percent, @end-color @end-percent); // FF 3.6+
+  background-image: linear-gradient(to right, @start-color @start-percent, @end-color @end-percent); // Standard, IE10
+  background-repeat: repeat-x;
+  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)",argb(@start-color), argb(@end-color))); // IE9 and down
+}
+//垂直方向直线渐变
+.gradient-vertical(@start-color: #555; @end-color: #333; @start-percent: 0%; @end-percent: 100%) {
+  background-image: -webkit-gradient(linear, left @start-percent, left @end-percent, from(@start-color), to(@end-color)); // Safari 4+, Chrome 2+
+  background-image: -webkit-linear-gradient(top, @start-color @start-percent, @end-color @end-percent); // Safari 5.1+, Chrome 10+
+  background-image: -moz-linear-gradient(top, @start-color @start-percent, @end-color @end-percent); // FF 3.6+
+  background-image: linear-gradient(to bottom, @start-color @start-percent, @end-color @end-percent); // Standard, IE10
+  background-repeat: repeat-x;
+  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb(@start-color), argb(@end-color))); // IE9 and down
+}
+//定向直线渐变
+.gradient-directional(@start-color: #555; @end-color: #333; @deg: 45deg) {
+  background-repeat: repeat-x;
+  background-image: -webkit-linear-gradient(@deg, @start-color, @end-color); // Safari 5.1+, Chrome 10+
+  background-image: -moz-linear-gradient(@deg, @start-color, @end-color); // FF 3.6+
+  background-image: linear-gradient(@deg, @start-color, @end-color); // Standard, IE10
+}
+//水平方向3色直线渐变
+.gradient-horizontal-3c(@start-color: #00b3ee; @mid-color: #7a43b6; @color-stop: 50%; @end-color: #c3325f) {
+  background-image: -webkit-gradient(left, linear, 0 0, 0 100%, from(@start-color), color-stop(@color-stop, @mid-color), to(@end-color));
+  background-image: -webkit-linear-gradient(left, @start-color, @mid-color @color-stop, @end-color);
+  background-image: -moz-linear-gradient(left, @start-color, @mid-color @color-stop, @end-color);
+  background-image: linear-gradient(to right, @start-color, @mid-color @color-stop, @end-color);
+  background-repeat: no-repeat;
+  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)",argb(@start-color), argb(@end-color))); // IE9 and down, gets no color-stop at all for proper fallback
+}
+//垂直方向3色直线渐变
+.gradient-vertical-3c(@start-color: #00b3ee; @mid-color: #7a43b6; @color-stop: 50%; @end-color: #c3325f) {
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@start-color), color-stop(@color-stop, @mid-color), to(@end-color));
+  background-image: -webkit-linear-gradient(@start-color, @mid-color @color-stop, @end-color);
+  background-image: -moz-linear-gradient(top, @start-color, @mid-color @color-stop, @end-color);
+  background-image: linear-gradient(@start-color, @mid-color @color-stop, @end-color);
+  background-repeat: no-repeat;
+  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb(@start-color), argb(@end-color))); // IE9 and down, gets no color-stop at all for proper fallback
+}
+//放射状渐变
+.gradient-radial(@inner-color: #555; @outer-color: #333) {
+  background-image: -webkit-gradient(radial, center center, 0, center center, 460, from(@inner-color), to(@outer-color));
+  background-image: -webkit-radial-gradient(circle, @inner-color, @outer-color);
+  background-image: -moz-radial-gradient(circle, @inner-color, @outer-color);
+  background-image: radial-gradient(circle, @inner-color, @outer-color);
+  background-repeat: no-repeat;
+}
+//条纹渐变
+.gradient-striped(@color: rgba(255,255,255,.15); @angle: 45deg) {
+  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, @color), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, @color), color-stop(.75, @color), color-stop(.75, transparent), to(transparent));
+  background-image: -webkit-linear-gradient(@angle, @color 25%, transparent 25%, transparent 50%, @color 50%, @color 75%, transparent 75%, transparent);
+  background-image: -moz-linear-gradient(@angle, @color 25%, transparent 25%, transparent 50%, @color 50%, @color 75%, transparent 75%, transparent);
+  background-image: linear-gradient(@angle, @color 25%, transparent 25%, transparent 50%, @color 50%, @color 75%, transparent 75%, transparent);
+}
+
+//transform 
+//偏移
+.translate(@x,@y){
+  -webkit-transform:translate(@x,@y);
+          transform:translate(@x,@y);
+}
+//3d偏移
+.translate3d(@x,@y,@z){
+  -webkit-transform:translate3d(@x,@y,@z);
+          transform:translate3d(@x,@y,@z);
+}
+//缩放
+.scale(@x,@y){
+  -webkit-transform:scale(@x,@y);
+          transform:scale(@x,@y);
+}
+//3d缩放
+.scale3d(@x,@y,@z){
+  -webkit-transform:scale3d(@x,@y,@z);
+          transform:scale3d(@x,@y,@z);
+}
+//角度旋转
+.rotate(@angle){
+  -webkit-transform:rotate(@angle);
+          transform:rotate(@angle);
+}
+//3dX轴旋转
+.rotateX(@angle){
+  -webkit-transform:rotateX(@angle);
+          transform:rotateX(@angle);
+}
+//3dY轴旋转
+.rotateY(@angle){
+  -webkit-transform:rotateY(@angle);
+          transform:rotateY(@angle);
+}
+//3dZ轴旋转
+.rotateZ(@angle){
+  -webkit-transform:rotateZ(@angle);
+          transform:rotateZ(@angle);
+}
+//倾斜
+.skew(@x, @y) {
+  -webkit-transform: skew(@x, @y);
+          transform: skew(@x, @y);
+  -webkit-backface-visibility: hidden;
+}
+//X轴倾斜
+.skewX(@angle){
+  -webkit-transform:skewX(@angle); 
+          transform:skewX(@angle);
+}
+//Y轴倾斜
+.skewY(@angle){
+  -webkit-transform:skewY(@angle);
+          transform:skewY(@angle);
+}
+//变换中心
+.transform-origin(@x,@y){
+  -webkit-transform-origin:@x @y;
+          transform-origin:@x @y;
+}
+
+//背面可见性
+.backface-visibility(@visibility){
+  -webkit-backface-visibility: @visibility;
+          backface-visibility: @visibility;
+}
+
+
+//动画混合函数
+.animation(@name,@duration,@speed,@number,@direction, @mode){
+	-webkit-animation: @name @duration @speed  @number @direction @mode;
+	        animation: @name @duration @speed  @number @direction @mode;
+}
+//动画名
+.animation-duration(@name){
+  -webkit-animation-name:@name;
+          animation-name:@name;
+}
+//动画执行时间
+.animation-duration(@time){
+  -webkit-animation-duration:@time;
+          animation-duration:@time;
+}
+//动画延时时间
+.animation-delay(@time){
+  -webkit-animation-delay:@time;
+          animation-delay:@time;
+}
+
+//过度动画混合函数
+.transition(@property,@duration,@timing-function,@delay){
+  -webkit-transition:@property @duration @timing-function @delay;
+          transition:@property @duration @timing-function @delay;
+}

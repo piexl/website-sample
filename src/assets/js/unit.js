@@ -5,12 +5,19 @@ Company:http://dragontrail.com/
 Creattime:2017-04-08
 */
 
-// 整理单元函数
-
+/**
+ * 整理单元函数
+ * 
+ */
 var Unit = function(){
     var unit = this;
-    //获取地址栏参数
-        // @parms: 参数名
+
+    /**
+     * 获取地址栏参数
+     * 
+     * @param {string} parms 参数名
+     * @returns {string} 参数返回值
+     */
     unit.GetUrlParms = function(parms){
        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
        var r = window.location.search.substr(1).match(reg);
@@ -18,7 +25,12 @@ var Unit = function(){
        return unescape(r[2]);
        return null;
     }
-    //浏览器类型的判断
+
+    /**
+     * 浏览器类型的判断
+     * 
+     * @returns {object} 参数返回浏览器判断信息
+     */
     unit.Browser = function () {
         var u = navigator.userAgent, app = navigator.appVersion;
         return {//移动终端浏览器版本信息   
@@ -35,17 +47,27 @@ var Unit = function(){
             wechat: u.toLowerCase().match(/MicroMessenger/i) == 'micromessenger' //是否微信内置浏览器
         };
     }();
-    //写cookie
-        // @name: 名称
-        // @value: 值
-        // @day: 时间（天数）
+
+    /**
+     * 写cookie
+     * 
+     * @param {any} name   名称
+     * @param {any} value  设置的值
+     * @param {any} day    时间（天）
+     */
     unit.SetCookie = function (name, value, day) {
         var exp = new Date();
         exp.setTime(exp.getTime() + day * 24 * 60 * 60 * 1000);
         document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + "; path=/";
     }
-    //获取cookie
-        // @name: 名称
+
+    /**
+     * 
+     * 获取cookie
+     * 
+     * @param {string} name 获取的名称
+     * @returns 返回获取的值
+     */
     unit.GetCookie = function (name) {
         var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
         if (arr = document.cookie.match(reg))
@@ -53,6 +75,7 @@ var Unit = function(){
         else
             return null;
     }
+    
     //初始化
     unit.Init = function(){
         console.log('unit init');

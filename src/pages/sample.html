@@ -60,6 +60,21 @@
                 <img src="../assets/imgs/nav_rightbar_img.jpg" alt="">
             </a>
         </div>
+        <!-- 滚动加载更多示例 -->
+        <div class="grid section scroll-list">
+            <div class="grid-item">
+                <div class="grid-item-inner">grid-item-6</div>
+            </div>
+            <div class="grid-item">
+                <div class="grid-item-inner">grid-item-6</div>
+            </div>
+            <div class="grid-item">
+                <div class="grid-item-inner">grid-item-6</div>
+            </div>
+            <div class="grid-item">
+                <div class="grid-item-inner">grid-item-6</div>
+            </div>
+        </div>
         <!-- 返回顶部示例 -->
         <button class="com-gotop hide"><i class="iconfont icon-dingbu"></i></button>
     </div>
@@ -70,5 +85,32 @@
 <script src="../assets/js/app.js"></script>
 <script src="../assets/js/component.js"></script>
 <script src="../assets/js/sample.js"></script>
+<script>
+    //滚动加载示例
+    var pageNum = App.defeatPageNum, //分页个数
+        postType = 'attractions', //post类型
+        $list = $('.scroll-list'), //listJQ对象
+        listIsAjaxEnd = $list.find('.grid-item').length < pageNum ? true : false; //是否可加载更多
+    // 列表滚动加载初始化
+    App.ListMoreInit($list, postType, listIsAjaxEnd, function (data, postType) {
+        console.log('ListMoreInit', data, 'postType', postType);
+        if (data.errcode == 0) {
+            var listHtml = '',
+                listData = data.rides_attractionss;
+            App.listIsAjaxEnd = listData.length < pageNum ? true : false;
+            for (i in listData) {
+                var item = listData[i],
+                    item_link = item.post_name,
+                    imgUrl = item.thumbnail ? item.thumbnail : '/webs/ush/assets/images/sample/facilities_img.jpg';
+                //列表模板
+                var item_tpl =  '<div class="grid-item">'+
+                                    '<div class="grid-item-inner"> + item.title + </div>'+
+                                '</div>';
+                listHtml += item_tpl;
+            }
+            $list.append(listHtml);
+        }
+    })
+</script>
 </body>
 </html>

@@ -6,15 +6,16 @@
     <meta name="description" content=""/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="format-detection" content="telephone=no" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <!-- 360浏览器 6.5+ 使用 webkit 引擎渲染 -->
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="shortcut icon" href="">
     <link rel="stylesheet" href="../assets/vendor/animate/animate.min.css">
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_609371_yowgbwwg1c5idx6r.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_822169_jqlybm7u4qp.css">
     <link rel="stylesheet" href="../assets/vendor/swiper-3.4.2/css/swiper.min.css">
+    <link rel="stylesheet" href="../assets/vendor/PhotoSwipe/photoswipe.css">
+    <link rel="stylesheet" href="../assets/vendor/PhotoSwipe/default-skin/default-skin.css">
     <link rel="stylesheet" href="../assets/css/app.css">
     <link rel="stylesheet" href="../assets/css/component.css">
     <link rel="stylesheet" href="../assets/css/smaple.css">
@@ -27,60 +28,137 @@
     </div>
     <div class="wrapper wrapper-fixed">
         <!-- 网格示例 -->
-        <div class="grid section">
-            <div class="grid-item">
-                <div class="grid-item-inner">grid-item-6</div>
-            </div>
-            <div class="grid-item">
-                <div class="grid-item-inner">grid-item-6</div>
-            </div>
-            <div class="grid-item">
-                <div class="grid-item-inner">grid-item-6</div>
-            </div>
-            <div class="grid-item">
-                <div class="grid-item-inner">grid-item-6</div>
+        <div class="section">
+            <h3 class="section-ttile">网格示例</h3>
+            <div class="grid">
+                <div class="grid-item">
+                    <div class="grid-item-inner">grid-item-8</div>
+                </div>
+                <div class="grid-item">
+                    <div class="grid-item-inner">grid-item-8</div>
+                </div>
+                <div class="grid-item">
+                    <div class="grid-item-inner">grid-item-8</div>
+                </div>
             </div>
         </div>
+
         <!-- swiper示例 -->
-        <div class="swiper-container swiper-sample section">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">Slide 1</div>
-                <div class="swiper-slide">Slide 2</div>
-                <div class="swiper-slide">Slide 3</div>
+        <div class="section">
+            <h3 class="section-ttile">swiper示例</h3>
+            <div class="swiper-container swiper-sample section">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">Slide 1</div>
+                    <div class="swiper-slide">Slide 2</div>
+                    <div class="swiper-slide">Slide 3</div>
+                </div>
+                <!-- 如果需要分页器 -->
+                <div class="swiper-pagination"></div>
+                <!-- 如果需要导航按钮 -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
             </div>
-            <!-- 如果需要分页器 -->
-            <div class="swiper-pagination"></div>
-            <!-- 如果需要导航按钮 -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
         </div>
+
         <!-- zoom-box示例 -->
-        <div class="flex-center-box text-center section">
-            <a href="#" class="zoom-box img-box">
-                <img src="../assets/imgs/nav_rightbar_img.jpg" alt="">
-            </a>
+        <div class="section">
+            <h3 class="section-ttile">图片放大效果</h3>
+            <div class="flex-center-box text-center">
+                <a href="#" class="zoom-box">
+                    <div class="img-box"><img src="../assets/imgs/nav_rightbar_img.jpg" alt=""></div>
+                </a>
+            </div>
         </div>
+
+        <!-- 视频弹层播放示例示例 -->
+        <div class="section">
+            <h3 class="section-ttile">视频弹层播放示例</h3>
+            <div class="flex-center-box text-center">
+                <a
+                    data-poster="../assets/imgs/nav_rightbar_img.jpg"
+                    href="http://1252139118.vod2.myqcloud.com/1fda134bvodtranscq1252139118/b9fd923a5285890781246846396/v.f30.mp4" data-role="video">
+                    <div class="img-box"><img src="../assets/imgs/nav_rightbar_img.jpg" alt=""></div>
+                </a>
+            </div>
+        </div>
+
+        <!-- 图册示例示例 -->
+        <div class="section">
+            <h3 class="section-ttile">图册示例示例</h3>
+            <div class="flex-center-box text-center">
+                <a 
+                    data-role='gallery'
+                    data-gallery='[{"imageUrl":"http://panama.projects.dragontrail.com/wp-content/uploads/sites/12/2018/08/Campana.jpg","width":1384,"height":923},{"imageUrl":"http://panama.projects.dragontrail.com/wp-content/uploads/sites/12/2018/08/Taboga.jpg","width":1680,"height":1116}]'>
+                    <div class="img-box"><img src="../assets/imgs/nav_rightbar_img.jpg" alt=""></div>
+                </a>
+            </div>
+        </div>
+
+        <!-- 社交媒体示例 -->
+        <div class="section">
+            <h3 class="section-ttile">社交媒体示例</h3>
+            <div class="flex-center-box text-center">
+                <div class="com-social-media">
+                    <a href="https://weibo.com/u/6610503252" class="media media-weibo" target="blank">
+                        <i class="iconfont icon-weibo"></i>
+                    </a>
+                    <div class="media media-weixin">
+                        <i class="iconfont icon-weixin"></i>
+                        <div class="qrcode-box" direction="bottom">
+                            <div class="qrcode qrcode-bottom">
+                                <img src="http://panama.projects.dragontrail.com/wp-content/uploads/sites/12/2018/08/%E4%BA%8C%E7%BB%B4%E7%A0%81.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media media-weixin">
+                        <i class="iconfont icon-weixin"></i>
+                        <div class="qrcode-box" direction="top">
+                            <div class="qrcode qrcode-bottom">
+                                <img src="http://panama.projects.dragontrail.com/wp-content/uploads/sites/12/2018/08/%E4%BA%8C%E7%BB%B4%E7%A0%81.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 搜索示例 -->
+        <div class="section">
+            <h3 class="section-ttile">搜索示例</h3>
+            <div class="text-center">
+                <div class="com-search">
+                    <div class="search-inner">
+                        <input type="text" data-role="search">
+                        <button class="search-btn"><i class="iconfont icon-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <!-- 滚动加载更多示例 -->
-        <div class="grid section scroll-list">
-            <div class="grid-item">
-                <div class="grid-item-inner">grid-item-6</div>
-            </div>
-            <div class="grid-item">
-                <div class="grid-item-inner">grid-item-6</div>
-            </div>
-            <div class="grid-item">
-                <div class="grid-item-inner">grid-item-6</div>
-            </div>
-            <div class="grid-item">
-                <div class="grid-item-inner">grid-item-6</div>
+        <div class="section">
+            <h3 class="section-ttile">滚动加载</h3>
+            <div class="grid scroll-list">
+                <div class="grid-item">
+                    <div class="grid-item-inner">grid-item-8</div>
+                </div>
+                <div class="grid-item">
+                    <div class="grid-item-inner">grid-item-8</div>
+                </div>
+                <div class="grid-item">
+                    <div class="grid-item-inner">grid-item-8</div>
+                </div>
             </div>
         </div>
+
         <!-- 返回顶部示例 -->
-        <button class="com-gotop hide"><i class="iconfont icon-dingbu"></i></button>
+        <button class="com-gotop hide"><i class="iconfont icon-angle-up"></i></button>
     </div>
 <!-- 脚本文件 -->
 <script src="../assets/vendor/jquery-1.9.1.min.js"></script>
 <script src="../assets/vendor/swiper-3.4.2/js/swiper.jquery.min.js"></script>
+<script src="../assets/vendor/PhotoSwipe/photoswipe-ui-default.min.js"></script>
+<script src="../assets/vendor/PhotoSwipe/photoswipe.min.js"></script>
 <script src="../assets/js/unit.js"></script>
 <script src="../assets/js/app.js"></script>
 <script src="../assets/js/component.js"></script>
@@ -88,15 +166,19 @@
 <script>
     //滚动加载示例
     var pageNum = App.defeatPageNum, //分页个数
-        postType = 'attractions', //post类型
+        url = 'mag.experience.list.json', //请求的url
         $list = $('.scroll-list'), //listJQ对象
+        params = {
+            paged:2,
+            post_type:'experience'
+        },
         listIsAjaxEnd = $list.find('.grid-item').length < pageNum ? true : false; //是否可加载更多
     // 列表滚动加载初始化
-    App.ListMoreInit($list, postType, listIsAjaxEnd, function (data, postType) {
-        console.log('ListMoreInit', data, 'postType', postType);
+    App.ListMoreInit($list, url, params, listIsAjaxEnd, function (data, url, params) {
+        // console.log('ListMoreInit', data, 'url', url, 'params', params);
         if (data.errcode == 0) {
             var listHtml = '',
-                listData = data.rides_attractionss;
+                listData = data.experiences;
             App.listIsAjaxEnd = listData.length < pageNum ? true : false;
             for (i in listData) {
                 var item = listData[i],
@@ -104,7 +186,7 @@
                     imgUrl = item.thumbnail ? item.thumbnail : '/webs/ush/assets/images/sample/facilities_img.jpg';
                 //列表模板
                 var item_tpl =  '<div class="grid-item">'+
-                                    '<div class="grid-item-inner"> + item.title + </div>'+
+                                    '<div class="grid-item-inner">' + item.title + '</div>'+
                                 '</div>';
                 listHtml += item_tpl;
             }

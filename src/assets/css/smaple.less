@@ -18,6 +18,12 @@ Creattime:2017-04-08
 //区域块
 .section{
     margin-bottom:40px;
+    .section-ttile{
+        font-weight:normal;
+        font-size:20px;
+        color:@gray-dark;
+        margin-bottom:0.5em;
+    }
 }
 
 //固定盒子模板
@@ -33,9 +39,10 @@ Creattime:2017-04-08
     @grid-column-gutters:30px;
     .make-row(@grid-column-gutters:@grid-column-gutters);
     .grid-item{
-        .make-column(@columns:6,@grid-columns:@grid-columns,@grid-column-gutters: @grid-column-gutters);
+        .make-column(@columns:8,@grid-columns:@grid-columns,@grid-column-gutters: @grid-column-gutters);
         height:100px;
-        background-color:@gray-light;
+        background-color:@gray-lighter;
+        margin-bottom:@grid-column-gutters;
         .grid-item-inner{
             width:100%;
             height:100%;

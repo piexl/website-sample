@@ -139,7 +139,7 @@ var Component = function(){
         function search(keyword, $input) {
             //console.log('keyword', keyword);
             if (checkSearchKeyword(keyword)) {
-                //window.location.href = "/search/" + keyword;
+                window.location.href = "/search/" + keyword;
             } else {
                 $input.addClass('error');
             }

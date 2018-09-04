@@ -26,12 +26,12 @@ var App = function(){
     /**
      * LoadMoreAjax 发送加载更多ajax请求
      * 
-     * @param {boolean}    isLoadingMore  是否为加载更多
-     * @param {object}     $elemet        列表jq对象
+     * @param {Boolean}    isLoadingMore  是否为加载更多
+     * @param {Object}     $elemet        列表jq对象
      * @param {String}     url            请求的url
-     * @param {object}     params         传递参数
+     * @param {Object}     params         传递参数
      *        @param {Number} paged         分页id
-     * @param {function}   callback       回调函数
+     * @param {Function}   callback       回调函数
      * @example
      */
     app.LoadMoreAjax = function (isLoadingMore, $elemet, url, params, callback) {
@@ -64,12 +64,12 @@ var App = function(){
     /**
      * ListMoreInit 列表滚动加载更多
      * 
-     * @param {object} $list            列表jq对象
-     * @param {string} url              请求的url
-     * @param {object} params           请求的参数
+     * @param {Object} $list            列表jq对象
+     * @param {String} url              请求的url
+     * @param {Object} params           请求的参数
      *        @param {Number} paged         分页id
-     * @param {boolean} listIsAjaxEnd   列表是否加载完
-     * @param {function} callback       回调函数
+     * @param {Boolean} listIsAjaxEnd   列表是否加载完
+     * @param {Function} callback       回调函数
      * @example
      */
     app.ListMoreInit = function ($list, url, params, listIsAjaxEnd, callback) {

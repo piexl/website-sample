@@ -51,9 +51,9 @@ var Unit = function(){
     /**
      * 写cookie
      * 
-     * @param {any} name   名称
-     * @param {any} value  设置的值
-     * @param {any} day    时间（天）
+     * @param {Sting}  name   名称
+     * @param {any}    value  设置的值
+     * @param {Number} day    时间（天）
      */
     unit.SetCookie = function (name, value, day) {
         var exp = new Date();

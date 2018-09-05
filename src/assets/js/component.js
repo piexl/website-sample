@@ -144,7 +144,7 @@ var Component = function(){
                 $input.addClass('error');
             }
         }
-        $('.search-btn').click(function () {
+        $('.com-search .search-btn').click(function () {
             var $this = $(this),
                 $input = $this.siblings('input[data-role="search"]'),
                 keyword = $input.val();

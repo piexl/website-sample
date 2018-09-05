@@ -1,5 +1,4 @@
-
-## 项目介绍
+# 项目介绍
 
 website-sample 是整理的响应式网站制作模板，其中整理我们展示类项目制作的基本模板和方法。
 
@@ -354,6 +353,8 @@ name | 名称 | Sting
 
 #### 打开弹层
 
+作用:打开弹层时候阻止页面滚动
+
 ```js
 //打开弹层
 app.OpenCoverLayer = function () {
@@ -363,6 +364,8 @@ app.OpenCoverLayer = function () {
 ```
 
 #### 关闭弹层
+
+作用:关闭弹层时候允许页面滚动
 
 ```js
 //关闭弹层
@@ -508,4 +511,320 @@ App.ListMoreInit($list, url, params, listIsAjaxEnd, function (data, url, params)
         $list.append(listHtml);
     }
 })
+```
+
+变量说明
+
+变量 | 说明 | 类型 | 备注
+-|-|-
+pageNum | 设置的分页个数 | Number |-
+$list | 列表jq对象 | Object | -
+url | 请求的url | Sting | -
+listIsAjaxEnd | 判断列表初始是否加载完成 | Boolean | -
+params | 名称 | Sting | paged必传类型为Number
+item_tpl | 列表的模板 | String | -
+
+### component.js 组件js
+
+使用component中组件
+
+引入样式文件
+
+```html
+<link rel="stylesheet" href="../assets/css/component.css">
+```
+
+引入js
+
+```html
+<script src="../assets/js/component.js"></script>
+```
+
+#### GoTopInit 返回顶部
+
+```js
+//返回顶部
+component.GoTopInit = function(){
+    var $comGotop = $('.com-gotop'),
+        initScrollTop = $(window).scrollTop();
+    function ShowGotop(top){
+        if (top > 100) {
+            $comGotop.removeClass('hide');
+        } else {
+            $comGotop.addClass('hide');
+        }
+    }
+    ShowGotop(initScrollTop);
+    $(window).on('scroll',function(){
+        var scrollTop = $(this).scrollTop(),
+            screenHeight = $(window).height();
+        ShowGotop(scrollTop);
+    });
+    $comGotop.click(function(){
+        $('body,html').animate({ scrollTop: 0 }, 500);
+    });
+}
+```
+
+使用示例
+
+```html
+<!-- 返回顶部示例 -->
+<button class="com-gotop hide"><i class="iconfont icon-angle-up"></i></button>
+```
+
+#### VideoInit 视频点击打开弹层播放
+
+```js
+//视频弹层
+component.VideoInit = function(){
+    $('body').on('click', 'a[data-role="video"]', function (event) {
+        event.preventDefault();
+        var $this = $(this),
+            videoUrl = $this.attr('href');
+            poster = $this.data('poster');
+        console.log('videoUrl', videoUrl);
+        if (videoUrl !== '') {
+            var videoTpl = '<div class="com-video-cover" id="videoCover">' +
+                '<div class="cover-inner">' +
+                '<div class="inner-box">' +
+                '<div class="cover-content">' +
+                '<button class="close-btn"><i class="iconfont icon-close"></i></button>' +
+                '<video src="' + videoUrl + '" poster="' + poster + '" controls="controls" webkit-playsinline="true" x-webkit-airplay="true" playsinline="true" x5-video-player-type="h5" x5-video-orientation="h5" x5-video-player-fullscreen="true">' +
+                '</video>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+            App.OpenCoverLayer();
+            $('body').append(videoTpl);
+            var $videoCover = $('#videoCover'),
+                $closeBtn = $videoCover.find('.close-btn'),
+                thisVideo = $videoCover.find('video')[0],
+                otherVideo = $('video')[0];
+            if (otherVideo && !otherVideo.paused) {
+                otherVideo.pause();
+            }
+            if (thisVideo.paused) {
+                thisVideo.play();
+            }
+            $closeBtn.click(function () {
+                $videoCover.remove();
+                App.CloseCoverLayer();
+            });
+        }
+    });
+}
+```
+
+使用示例
+
+```html
+<a
+    data-poster="../assets/imgs/nav_rightbar_img.jpg"
+    href="http://1252139118.vod2.myqcloud.com/1fda134bvodtranscq1252139118/b9fd923a5285890781246846396/v.f30.mp4" data-role="video">
+    <div class="img-box"><img src="../assets/imgs/nav_rightbar_img.jpg" alt=""></div>
+</a>
+```
+
+`data-poster`为视频的封面,`href`为视频地址
+
+#### GalleryInit 图片查看器
+
+依赖插件`PhotoSwipe`
+
+引入样式
+
+```html
+<link rel="stylesheet" href="../assets/vendor/PhotoSwipe/photoswipe.css">
+<link rel="stylesheet" href="../assets/vendor/PhotoSwipe/default-skin/default-skin.css">
+```
+
+引入js
+
+```html
+<script src="../assets/vendor/PhotoSwipe/photoswipe-ui-default.min.js"></script>
+<script src="../assets/vendor/PhotoSwipe/photoswipe.min.js"></script>
+```
+
+插件实现
+
+```js
+//图片查看器
+component.GalleryInit = function () {
+    if (component.gallery) {
+        component.gallery.destroy();
+    }
+    $('body').on('click', '[data-role="gallery"]', function (e) {
+        e.stopPropagation();
+        var swipes = $(this).data("gallery"),
+            items = [];
+        photoSwipeTpl = '<div class="pswp pswp-cover" id="photoSwipe" tabindex="-1" role="dialog" aria-hidden="true">' +
+            '<div class="pswp__bg"></div>' +
+            '<div class="pswp__scroll-wrap">' +
+            '<div class="pswp__container">' +
+            '<div class="pswp__item"></div>' +
+            '<div class="pswp__item"></div>' +
+            '<div class="pswp__item"></div>' +
+            '</div>' +
+            '<div class="pswp__ui pswp__ui--hidden">' +
+            '<div class="pswp__top-bar">' +
+            '<div class="pswp__counter"></div>' +
+            '<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>' +
+            '<div class="pswp__preloader">' +
+            '<div class="pswp__preloader__icn">' +
+            '<div class="pswp__preloader__cut">' +
+            '<div class="pswp__preloader__donut"></div>' +
+            '</div>' +
+            ' </div>' +
+            '</div>' +
+            '</div>' +
+            '<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">' +
+            '<div class="pswp__share-tooltip"></div>' +
+            '</div>' +
+            '<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">' +
+            '</button>' +
+            '<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">' +
+            '</button>' +
+            '<div class="pswp__caption">' +
+            '<div class="pswp__caption__center"></div>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+        $photoSwipe = $(photoSwipeTpl).appendTo('body');
+        // console.log("swipes", swipes);
+        swipes.forEach(function (item) {
+            items.push({
+                src: item.imageUrl,
+                w: item.width,
+                h: item.height
+            })
+        });
+        component.gallery = new PhotoSwipe($('#photoSwipe')[0], PhotoSwipeUI_Default, items, {
+            index: 0, // start at first slide
+            bgOpacity: 0.7
+        });
+        component.gallery.init();
+    })
+}
+```
+
+使用示例
+
+```html
+<a  data-role='gallery'
+    data-gallery='[{"imageUrl":"http://panama.projects.dragontrail.com/wp-content/uploads/sites/12/2018/08/Campana.jpg","width":1384,"height":923},{"imageUrl":"http://panama.projects.dragontrail.com/wp-content/uploads/sites/12/2018/08/Taboga.jpg","width":1680,"height":1116}]'>
+    <div class="img-box"><img src="../assets/imgs/nav_rightbar_img.jpg" alt=""></div>
+</a>
+```
+
+`data-gallery`为图册的数组： `imageUrl`图片的地址、`width`为图片的宽度、`height`为图片的高度
+
+#### RearchInit 搜索
+
+针对搜索特殊字符和空字符串的错误处理及提示
+
+实现
+
+```js
+//搜索
+component.RearchInit = function () {
+    function checkSearchKeyword(keyword) {
+        if (keyword !== '' && !/^\s*$/g.test(keyword) && keyword !== '.' && !/\//.test(keyword) && !/\\/.test(keyword)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function search(keyword, $input) {
+        //console.log('keyword', keyword);
+        if (checkSearchKeyword(keyword)) {
+            window.location.href = "/search/" + keyword;
+        } else {
+            $input.addClass('error');
+        }
+    }
+    $('.com-search .search-btn').click(function () {
+        var $this = $(this),
+            $input = $this.siblings('input[data-role="search"]'),
+            keyword = $input.val();
+        search(keyword, $input);
+    });
+    $('input[data-role="search"]').on('keyup', function (event) {
+        var $input = $(this),
+            keyword = $input.val();
+        e = event ? event : (window.event ? window.event : null);
+        var currKey = 0;
+        currKey = e.keyCode || e.which || e.charCode;
+        if (currKey == 13) {
+            search(keyword, $input.parents('.search-inner'));
+        }
+    });
+    $('input[data-role="search"]').on('input', function () {
+        var $input = $(this),
+            isError = $input.hasClass('error'),
+            keyword = $input.val();
+        if (checkSearchKeyword(keyword)) {
+            if (isError) {
+                $input.removeClass('error');
+                $input.parents('.search-inner').removeClass('error');
+            }
+        } else {
+            $input.addClass('error');
+            $input.parents('.search-inner').addClass('error');
+        }
+    });
+}
+```
+
+使用示例
+
+```html
+<div class="com-search">
+    <div class="search-inner">
+        <input type="text" data-role="search">
+        <button class="search-btn"><i class="iconfont icon-search"></i></button>
+    </div>
+</div>
+```
+
+#### 社交媒体
+
+使用示例
+
+微博
+
+```html
+<div class="com-social-media">
+    <a href="https://weibo.com/u/6610503252" class="media media-weibo" target="blank">
+        <i class="iconfont icon-weibo"></i>
+    </a>
+</div>
+```
+
+微信
+
+```html
+<div class="com-social-media">
+    <div class="media media-weixin">
+        <i class="iconfont icon-weixin"></i>
+        <div class="qrcode-box" direction="bottom">
+            <div class="qrcode qrcode-bottom">
+                <img src="http://panama.projects.dragontrail.com/wp-content/uploads/sites/12/2018/08/%E4%BA%8C%E7%BB%B4%E7%A0%81.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+`qrcode-box`的`direction`属性为`bottom`(二维码在下))|`top`(二维码在上)
+
+#### 图片放大效果
+
+```html
+<a href="#" class="com-zoom-box">
+    <div class="img-box"><img src="../assets/imgs/nav_rightbar_img.jpg" alt=""></div>
+</a>
 ```
